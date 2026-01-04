@@ -11,6 +11,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LucideIcon, ArrowRight, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 // Define the shape of a quick action card
 export interface QuickActionCard {
@@ -221,9 +222,11 @@ export const QuickActionCards: React.FC<QuickActionCardsProps> = ({
           <p className="text-sunset-600 font-medium mb-4">
             Need help getting started?
           </p>
-          <button className="px-6 py-3 bg-white/80 backdrop-blur-sm border-2 border-sunset-300 rounded-xl text-sunset-700 font-bold hover:bg-sunset-50 hover:border-sunset-400 active:scale-95 transition-all duration-200 shadow-md hover:shadow-lg">
-            View Documentation
-          </button>
+          <Link href="https://github.com/sirecodes/FullStack-Todo-App/blob/main/VERCEL_DEPLOYMENT_GUIDE.md">
+            <button className="px-6 py-3 bg-white/80 backdrop-blur-sm border-2 border-sunset-300 rounded-xl text-sunset-700 font-bold hover:bg-sunset-50 hover:border-sunset-400 active:scale-95 transition-all duration-200 shadow-md hover:shadow-lg">
+              View Documentation
+            </button>
+          </Link>
         </motion.div>
       </div>
     </section>

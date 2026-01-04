@@ -13,6 +13,7 @@ import { useResponsive } from "@/hooks/useResponsive";
 import { ArrowRight, Sparkles, CheckCircle2, TrendingUp, Zap } from "lucide-react";
 import type { HeroSectionProps } from "@/types/components";
 import { staggerContainer, fadeInUp } from "@/lib/animations";
+import Link from "next/link";
 
 /**
  * Default props for HeroSection
@@ -179,18 +180,19 @@ export const HeroSection: React.FC<Partial<HeroSectionProps>> = (props) => {
                 <span>{ctaText}</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
               </button>
-              
-              <button
-                onClick={() => {
-                  const element = document.getElementById('features');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="px-8 py-4 bg-white/80 backdrop-blur-sm border-2 border-sunset-300 rounded-xl text-sunset-700 text-lg font-bold hover:bg-sunset-50 hover:border-sunset-400 active:scale-95 transition-all duration-200"
-              >
-                Learn More
-              </button>
+              <Link href="https://github.com/sirecodes/FullStack-Todo-App/blob/main/backend/DEPLOYMENT-GUIDE.md">
+                <button
+                  onClick={() => {
+                    const element = document.getElementById('features');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="px-8 py-4 bg-white/80 backdrop-blur-sm border-2 border-sunset-300 rounded-xl text-sunset-700 text-lg font-bold hover:bg-sunset-50 hover:border-sunset-400 active:scale-95 transition-all duration-200"
+                  >
+                  Learn More
+                </button>
+                </Link>
             </motion.div>
           </motion.div>
 
