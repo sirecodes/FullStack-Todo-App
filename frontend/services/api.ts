@@ -1,26 +1,9 @@
-/**
- * Backend API Client Service
- *
- * Provides typed HTTP client for communicating with FastAPI backend.
- * Handles authentication, error handling, and response transformation.
- *
- * @file services/api.ts
- * @see /specs/001-phase2-homepage-ui/ - Backend integration
- */
-
 import axios, { AxiosError, AxiosInstance } from "axios";
 
-// API Configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
-const API_TIMEOUT = 30000; // 30 seconds (increased for database queries)
+// ✅ USE RELATIVE PATH - This goes through Vercel proxy to HF
+const API_BASE_URL = "/api";  // Changed from full HF URL
+const API_TIMEOUT = 30000;
 
-// ============================================================================
-// Types & Interfaces
-// ============================================================================
-
-/**
- * Task type representing a todo item
- */
 export interface Task {
   id: string;
   title: string;
@@ -29,28 +12,21 @@ export interface Task {
   created_at: string;
   updated_at: string;
   completed_at: string | null;
-  // New fields for Skills & Subagents Architecture
   priority: string;
   tags: string[];
   due_date: string | null;
   status: string;
 }
 
-/**
- * History entry type for task operations
- */
 export interface HistoryEntry {
   history_id: string;
-  task_id: string | null;  // Nullable - preserved after task deletion
-  task_title: string;  // Task title for display
+  task_id: string | null;
+  task_title: string;
   action_type: "CREATED" | "UPDATED" | "COMPLETED" | "INCOMPLETED" | "DELETED";
   description: string | null;
   timestamp: string;
 }
 
-/**
- * Pagination metadata
- */
 export interface PaginationMeta {
   page: number;
   limit: number;
@@ -60,9 +36,6 @@ export interface PaginationMeta {
   has_prev: boolean;
 }
 
-/**
- * Paginated response wrapper
- */
 export interface PaginatedResponse<T> {
   success: boolean;
   data: T[];
@@ -71,9 +44,6 @@ export interface PaginatedResponse<T> {
   error: string | null;
 }
 
-/**
- * Standard API response wrapper
- */
 export interface ApiResponse<T> {
   success: boolean;
   data: T;
@@ -81,9 +51,6 @@ export interface ApiResponse<T> {
   error: string | null;
 }
 
-/**
- * Weekly statistics
- */
 export interface WeeklyStats {
   tasks_created_this_week: number;
   tasks_completed_this_week: number;
@@ -94,60 +61,71 @@ export interface WeeklyStats {
   total_tasks: number;
 }
 
-/**
- * System health status
- */
 export interface HealthStatus {
   status: "healthy" | "degraded" | "down";
   service: string;
   timestamp?: string;
 }
 
-// ============================================================================
-// API Client Class
-// ============================================================================
-
 class ApiClient {
   private client: AxiosInstance;
 
   constructor() {
     this.client = axios.create({
-      baseURL: API_BASE_URL,
+      baseURL: API_BASE_URL,  // ✅ Now uses /api (relative path)
       timeout: API_TIMEOUT,
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials: true, // Include cookies in all requests
+      withCredentials: true,  // ✅ Cookies now work (same domain)
     });
 
-    // Add request interceptor to include Authorization header
+    // ✅ Request interceptor - attach token if exists
     this.client.interceptors.request.use(
       (config) => {
-        // Get token from localStorage
+        // Try localStorage first (backup)
         const token = localStorage.getItem('auth_token');
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
+          console.log('📤 Attaching token to:', config.url);
+        } else {
+          console.log('📤 No token, using cookies for:', config.url);
         }
         return config;
       },
       (error) => Promise.reject(error)
     );
 
-    // Add response interceptor for error handling and 401 detection
+    // ✅ Response interceptor - handle errors
     this.client.interceptors.response.use(
-      (response) => response,
+      (response) => {
+        console.log('✅ Response from:', response.config.url, response.status);
+        return response;
+      },
       async (error: AxiosError) => {
-        console.error("API Error:", error.message);
+        console.error("❌ API Error:", {
+          url: error.config?.url,
+          status: error.response?.status,
+          message: error.message,
+        });
 
-        // Handle 401 Unauthorized - session expired
+        // Handle 401 - redirect to login
         if (error.response?.status === 401) {
-          // Dynamically import to avoid circular dependencies
-          const { sessionExpired } = await import("@/utils/authAlerts");
+          console.error('🚫 401 Unauthorized - redirecting to login');
+          
+          // Clear any stored tokens
+          localStorage.removeItem('auth_token');
+          localStorage.removeItem('user');
+          
+          // Show alert if available
+          try {
+            const { sessionExpired } = await import("@/utils/authAlerts");
+            await sessionExpired();
+          } catch (e) {
+            console.log('Could not show session expired alert');
+          }
 
-          // Show session expired alert
-          await sessionExpired();
-
-          // Redirect to login page
+          // Redirect to login
           if (typeof window !== "undefined") {
             window.location.href = "/login";
           }
@@ -158,13 +136,7 @@ class ApiClient {
     );
   }
 
-  // ========================================================================
-  // Health Check Endpoints
-  // ========================================================================
-
-  /**
-   * Check backend health status
-   */
+  // Health Check
   async getHealth(): Promise<HealthStatus> {
     try {
       const response = await this.client.get<ApiResponse<HealthStatus>>("/health");
@@ -175,13 +147,7 @@ class ApiClient {
     }
   }
 
-  // ========================================================================
-  // Task Endpoints (CRUD Operations)
-  // ========================================================================
-
-  /**
-   * Fetch all tasks
-   */
+  // Task Endpoints
   async getTasks(): Promise<Task[]> {
     try {
       const response = await this.client.get<ApiResponse<Task[]>>("/tasks");
@@ -192,9 +158,6 @@ class ApiClient {
     }
   }
 
-  /**
-   * Fetch a single task by ID
-   */
   async getTask(id: string): Promise<Task> {
     try {
       const response = await this.client.get<ApiResponse<Task>>(`/tasks/${id}`);
@@ -205,9 +168,6 @@ class ApiClient {
     }
   }
 
-  /**
-   * Create a new task
-   */
   async createTask(
     title: string,
     description?: string,
@@ -228,9 +188,6 @@ class ApiClient {
     }
   }
 
-  /**
-   * Update an existing task
-   */
   async updateTask(
     id: string,
     updates: Partial<{
@@ -250,9 +207,6 @@ class ApiClient {
     }
   }
 
-  /**
-   * Mark task as complete
-   */
   async completeTask(id: string): Promise<Task> {
     try {
       const response = await this.client.patch<ApiResponse<Task>>(`/tasks/${id}/complete`);
@@ -263,9 +217,6 @@ class ApiClient {
     }
   }
 
-  /**
-   * Mark task as incomplete
-   */
   async incompleteTask(id: string): Promise<Task> {
     try {
       const response = await this.client.patch<ApiResponse<Task>>(`/tasks/${id}/incomplete`);
@@ -276,9 +227,6 @@ class ApiClient {
     }
   }
 
-  /**
-   * Delete a task
-   */
   async deleteTask(id: string): Promise<void> {
     try {
       await this.client.delete(`/tasks/${id}`);
@@ -288,13 +236,7 @@ class ApiClient {
     }
   }
 
-  // ========================================================================
   // History Endpoints
-  // ========================================================================
-
-  /**
-   * Fetch task history with pagination and filtering
-   */
   async getHistory(
     page: number = 1,
     limit: number = 10,
@@ -312,7 +254,6 @@ class ApiClient {
         `/history?${params.toString()}`
       );
 
-      // Transform nested response and map backend field names to frontend expectations
       const backendPagination = response.data.data.pagination;
       return {
         success: response.data.success,
@@ -334,9 +275,6 @@ class ApiClient {
     }
   }
 
-  /**
-   * Delete a specific history entry
-   */
   async deleteHistoryEntry(historyId: string): Promise<void> {
     try {
       await this.client.delete(`/history/${historyId}`);
@@ -346,13 +284,7 @@ class ApiClient {
     }
   }
 
-  // ========================================================================
   // Statistics Endpoints
-  // ========================================================================
-
-  /**
-   * Fetch weekly statistics
-   */
   async getWeeklyStats(): Promise<WeeklyStats> {
     try {
       const response = await this.client.get<ApiResponse<WeeklyStats>>("/stats/weekly");
@@ -363,13 +295,7 @@ class ApiClient {
     }
   }
 
-  // ========================================================================
   // Notification Endpoints
-  // ========================================================================
-
-  /**
-   * Fetch notifications for authenticated user
-   */
   async getNotifications(unreadOnly: boolean = false): Promise<{
     notifications: any[];
     unread_count: number;
@@ -387,9 +313,6 @@ class ApiClient {
     }
   }
 
-  /**
-   * Mark notification as read
-   */
   async markNotificationAsRead(notificationId: string): Promise<any> {
     try {
       const response = await this.client.patch(`/notifications/${notificationId}/read`);
@@ -400,9 +323,6 @@ class ApiClient {
     }
   }
 
-  /**
-   * Mark all notifications as read
-   */
   async markAllNotificationsAsRead(): Promise<{ count: number }> {
     try {
       const response = await this.client.patch('/notifications/mark-all-read');
@@ -413,9 +333,6 @@ class ApiClient {
     }
   }
 
-  /**
-   * Get unread notification count
-   */
   async getUnreadCount(): Promise<number> {
     try {
       const response = await this.client.get<ApiResponse<{ count: number }>>('/notifications/unread/count');
@@ -427,13 +344,6 @@ class ApiClient {
   }
 }
 
-// ============================================================================
-// Singleton Export
-// ============================================================================
-
-// Create and export singleton instance
 const apiClient = new ApiClient();
 export default apiClient;
-
-// Also export the class for testing purposes
 export { ApiClient };
