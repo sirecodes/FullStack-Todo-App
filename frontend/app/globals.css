@@ -1,0 +1,393 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ========================================
+   TAILWIND CSS THEME INTEGRATION
+   ======================================== */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Sunset Color Scale Variables */
+  --color-sunset-50: var(--sunset-50);
+  --color-sunset-100: var(--sunset-100);
+  --color-sunset-200: var(--sunset-200);
+  --color-sunset-300: var(--sunset-300);
+  --color-sunset-400: var(--sunset-400);
+  --color-sunset-500: var(--sunset-500);
+  --color-sunset-600: var(--sunset-600);
+  --color-sunset-700: var(--sunset-700);
+  --color-sunset-800: var(--sunset-800);
+  --color-sunset-900: var(--sunset-900);
+  --color-gold: var(--gold);
+  --color-amber: var(--amber);
+  --color-coral: var(--coral);
+}
+
+/* ========================================
+   LIGHT MODE - WARM SUNSET ELEGANCE
+   ======================================== */
+:root {
+  /* Border Radius - Softer, More Elegant */
+  --radius: 0.75rem;
+
+  /* ========================================
+     WARM SUNSET PALETTE (OKLCH)
+     ======================================== */
+  --sunset-50: oklch(0.982 0.015 75);    /* #FFF8F0 - Cream */
+  --sunset-100: oklch(0.952 0.045 65);   /* #FFEDD5 - Soft peach */
+  --sunset-200: oklch(0.895 0.085 55);   /* #FED7AA - Light apricot */
+  --sunset-300: oklch(0.825 0.135 45);   /* #FDBA74 - Warm peach */
+  --sunset-400: oklch(0.735 0.165 35);   /* #FB923C - Medium coral */
+  --sunset-500: oklch(0.665 0.195 25);   /* #FF6B35 - Burnt orange (PRIMARY) */
+  --sunset-600: oklch(0.595 0.215 20);   /* #EA580C - Deep orange */
+  --sunset-700: oklch(0.515 0.245 18);   /* #C2410C - Dark terracotta */
+  --sunset-800: oklch(0.445 0.255 15);   /* #9A3412 - Deep rust */
+  --sunset-900: oklch(0.385 0.265 12);   /* #7C2D12 - Darkest rust */
+
+  /* Complementary Warm Accents */
+  --gold: oklch(0.785 0.145 85);         /* #FFB627 - Warm gold */
+  --amber: oklch(0.715 0.165 65);        /* #F59E0B - Rich amber */
+  --coral: oklch(0.725 0.175 45);        /* #FF8C42 - Soft coral */
+  --terracotta: oklch(0.645 0.185 55);   /* #D97706 - Earthy */
+
+  /* Background Colors - Light & Airy */
+  --bg-light-main: oklch(0.99 0.005 75);    /* Almost white with warm tint */
+  --bg-light-card: oklch(1 0 0);            /* Pure white */
+  --bg-light-elevated: oklch(0.975 0.01 70); /* Slight warm tint */
+  --bg-cream: oklch(0.982 0.015 75);        /* Cream background */
+
+  /* Dark Mode Backgrounds - Warm Dark */
+  --bg-darkest: oklch(0.12 0.02 30);        /* Warm near-black */
+  --bg-dark: oklch(0.16 0.02 35);           /* Dark warm */
+  --bg-card-dark: oklch(0.20 0.02 40);      /* Card background dark */
+  --bg-elevated-dark: oklch(0.24 0.02 42);  /* Elevated dark */
+
+  /* Text Colors - Warm & Elegant */
+  --text-primary: oklch(0.15 0.02 30);      /* Warm near-black */
+  --text-secondary: oklch(0.50 0.01 40);    /* Warm gray */
+  --text-muted: oklch(0.60 0.01 45);        /* Light warm gray */
+  --text-warm: oklch(0.515 0.245 18);       /* Sunset-700 */
+
+  /* Glass Effects - Warm Tinted */
+  --glass-bg: oklch(1 0 0 / 0.7);           /* White translucent */
+  --glass-border: oklch(0.895 0.085 55 / 0.3); /* Warm border */
+  --glass-warm: oklch(0.982 0.015 75 / 0.5); /* Cream glass */
+
+  /* ========================================
+     SHADOWS & GLOW EFFECTS - WARM TONES
+     ======================================== */
+  --glow-sunset: 0 0 25px oklch(0.665 0.195 25 / 0.35), 0 0 50px oklch(0.665 0.195 25 / 0.15);
+  --glow-gold: 0 0 25px oklch(0.785 0.145 85 / 0.4), 0 0 50px oklch(0.785 0.145 85 / 0.2);
+  --glow-coral: 0 0 25px oklch(0.725 0.175 45 / 0.35), 0 0 50px oklch(0.725 0.175 45 / 0.15);
+
+  /* Elegant Shadows */
+  --shadow-sm: 0 2px 10px oklch(0.665 0.195 25 / 0.08);
+  --shadow-md: 0 4px 20px oklch(0.665 0.195 25 / 0.12);
+  --shadow-lg: 0 8px 35px oklch(0.665 0.195 25 / 0.16);
+  --shadow-xl: 0 12px 50px oklch(0.665 0.195 25 / 0.22);
+  --shadow-warm: 0 0 45px oklch(0.665 0.195 25 / 0.12);
+
+  /* ========================================
+     SEMANTIC COLOR TOKENS - LIGHT MODE
+     ======================================== */
+  
+  /* Backgrounds */
+  --background: var(--bg-light-main);
+  --foreground: var(--text-primary);
+
+  /* Cards & Surfaces */
+  --card: var(--bg-light-card);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-light-card);
+  --popover-foreground: var(--text-primary);
+
+  /* Primary - Burnt Orange */
+  --primary: var(--sunset-500);
+  --primary-foreground: oklch(1 0 0);        /* White on orange */
+
+  /* Secondary - Soft Peach */
+  --secondary: var(--sunset-100);
+  --secondary-foreground: var(--sunset-800);
+
+  /* Muted - Warm Light Gray */
+  --muted: var(--sunset-50);
+  --muted-foreground: var(--text-secondary);
+
+  /* Accent - Warm Gold */
+  --accent: var(--gold);
+  --accent-foreground: var(--sunset-900);
+
+  /* Destructive - Keep Red for Errors */
+  --destructive: oklch(0.58 0.22 15);        /* Warm red */
+  --destructive-foreground: oklch(1 0 0);
+
+  /* Success - Warm Green */
+  --success: oklch(0.65 0.15 145);           /* Warm teal-green */
+  --success-foreground: oklch(1 0 0);
+
+  /* Borders & Inputs */
+  --border: var(--sunset-200);
+  --input: var(--sunset-300);
+
+  /* Focus Ring */
+  --ring: var(--sunset-500);
+}
+
+/* ========================================
+   DARK MODE - WARM ELEGANT DARKNESS
+   ======================================== */
+.dark {
+  /* Backgrounds - Warm Dark */
+  --background: var(--bg-darkest);
+  --foreground: oklch(0.95 0.01 70);
+
+  /* Cards - Warm Dark Elevated */
+  --card: var(--bg-card-dark);
+  --card-foreground: oklch(0.95 0.01 70);
+  --popover: var(--bg-card-dark);
+  --popover-foreground: oklch(0.95 0.01 70);
+
+  /* Primary - Lighter Orange for Contrast */
+  --primary: var(--sunset-400);
+  --primary-foreground: var(--bg-darkest);
+
+  /* Secondary - Dark Warm */
+  --secondary: var(--bg-elevated-dark);
+  --secondary-foreground: oklch(0.90 0.01 70);
+
+  /* Muted */
+  --muted: var(--bg-elevated-dark);
+  --muted-foreground: oklch(0.70 0.01 50);
+
+  /* Accent - Gold Glow */
+  --accent: var(--gold);
+  --accent-foreground: var(--bg-darkest);
+
+  /* Destructive */
+  --destructive: oklch(0.65 0.22 15);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* Success */
+  --success: oklch(0.70 0.15 145);
+  --success-foreground: oklch(1 0 0);
+
+  /* Borders - Subtle Warm */
+  --border: oklch(0.30 0.02 40 / 0.3);
+  --input: oklch(0.35 0.02 42 / 0.5);
+
+  /* Focus Ring */
+  --ring: var(--sunset-400);
+}
+
+/* ========================================
+   BASE STYLES WITH ACCESSIBILITY
+   ======================================== */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ========================================
+     ELEGANT FOCUS STATES
+     ======================================== */
+  *:focus-visible {
+    outline: 2px solid var(--sunset-500);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--sunset-500);
+    outline-offset: 3px;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none;
+    border-color: var(--sunset-500);
+    box-shadow: 0 0 0 3px oklch(0.665 0.195 25 / 0.2);
+  }
+
+  /* ========================================
+     ELEGANT TEXT SELECTION
+     ======================================== */
+  ::selection {
+    background-color: var(--sunset-300);
+    color: var(--sunset-900);
+  }
+
+  /* ========================================
+     TYPOGRAPHY - WARM & READABLE
+     ======================================== */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  a {
+    color: var(--sunset-600);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--sunset-500);
+  }
+
+  /* ========================================
+     CUSTOM SCROLLBAR - WARM ELEGANT
+     ======================================== */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--sunset-50);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--sunset-300);
+    border-radius: 6px;
+    border: 2px solid var(--sunset-50);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--sunset-500);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--sunset-300) var(--sunset-50);
+  }
+
+  /* ========================================
+     REDUCED MOTION
+     ======================================== */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ========================================
+     SWEETALERT2 - WARM ELEGANT STYLING
+     ======================================== */
+  .swal2-popup {
+    background: linear-gradient(135deg, var(--bg-light-card), var(--sunset-50)) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 2px solid var(--sunset-300) !important;
+    border-radius: 20px !important;
+    box-shadow: var(--shadow-xl), var(--glow-sunset) !important;
+  }
+
+  .swal2-title {
+    color: var(--sunset-800) !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 3px oklch(0.665 0.195 25 / 0.1) !important;
+  }
+
+  .swal2-html-container {
+    color: var(--text-secondary) !important;
+  }
+
+  .swal2-confirm {
+    background: linear-gradient(135deg, var(--sunset-500), var(--sunset-600)) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: var(--shadow-md), var(--glow-sunset) !important;
+    font-weight: 600 !important;
+    padding: 14px 28px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .swal2-confirm:hover {
+    background: linear-gradient(135deg, var(--sunset-400), var(--sunset-500)) !important;
+    box-shadow: var(--shadow-lg), var(--glow-sunset) !important;
+    transform: translateY(-2px) !important;
+  }
+
+  .swal2-cancel {
+    background: var(--sunset-100) !important;
+    border: 2px solid var(--sunset-300) !important;
+    border-radius: 12px !important;
+    color: var(--sunset-700) !important;
+    font-weight: 600 !important;
+    padding: 14px 28px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .swal2-cancel:hover {
+    background: var(--sunset-200) !important;
+    border-color: var(--sunset-400) !important;
+    color: var(--sunset-800) !important;
+  }
+
+  .swal2-deny {
+    background: linear-gradient(135deg, oklch(0.65 0.22 15), oklch(0.60 0.24 12)) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 0 25px oklch(0.65 0.22 15 / 0.3) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 14px 28px !important;
+  }
+
+  .swal2-icon.swal2-success {
+    border-color: var(--success) !important;
+  }
+
+  .swal2-icon.swal2-error {
+    border-color: var(--destructive) !important;
+  }
+
+  .swal2-icon.swal2-warning {
+    border-color: var(--amber) !important;
+    color: var(--amber) !important;
+  }
+
+  .swal2-input, .swal2-textarea {
+    background: var(--bg-light-card) !important;
+    border: 2px solid var(--sunset-300) !important;
+    border-radius: 10px !important;
+    color: var(--text-primary) !important;
+    padding: 12px 16px !important;
+  }
+
+  .swal2-input:focus, .swal2-textarea:focus {
+    border-color: var(--sunset-500) !important;
+    box-shadow: 0 0 0 3px oklch(0.665 0.195 25 / 0.15) !important;
+    outline: none !important;
+  }
+}
