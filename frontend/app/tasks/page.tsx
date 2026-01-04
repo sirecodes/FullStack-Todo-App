@@ -20,6 +20,7 @@ import { useTasks } from '@/hooks/useTasks';
 import { useFilters } from '@/hooks/useFilters';
 import { useSort } from '@/hooks/useSort';
 import type { Task, TaskStatus, Priority } from '@/types/task.types';
+import { useProtectedRoute } from '@/hooks/useProtectedRoute';
 
 
 /**
@@ -118,6 +119,23 @@ export default function TasksPage() {
   const completedTasks = tasks.filter(t => t.status === 'COMPLETED').length;
   const incompleteTasks = tasks.length - completedTasks;
   const urgentTasks = tasks.filter(t => t.priority === 'VERY_IMPORTANT' || t.priority === 'HIGH').length;
+
+  const { isLoading: authLoading } = useProtectedRoute();
+  
+    // Show loading while checking auth
+    if (authLoading) {
+      return (
+        <div className="flex items-center justify-center min-h-screen bg-linear-to-br from-sunset-50 via-white to-sunset-100">
+          <motion.div
+            className="h-16 w-16"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          >
+            <div className="h-full w-full rounded-full border-4 border-sunset-200 border-t-sunset-500 shadow-lg" />
+          </motion.div>
+        </div>
+      );
+    }
 
   return (
     <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-linear-to-br from-sunset-50 via-white to-sunset-100">
