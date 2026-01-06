@@ -226,9 +226,9 @@ npm run dev
 - Navigate to http://localhost:3000
 - Should see homepage (public)
 - Navigate to http://localhost:3000/login
-- Should see purple-themed login page
+- Should see sunset-themed login page
 - Navigate to http://localhost:3000/signup
-- Should see purple-themed signup page
+- Should see sunset-themed signup page
 
 ---
 

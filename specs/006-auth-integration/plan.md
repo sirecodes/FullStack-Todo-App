@@ -7,7 +7,7 @@
 
 ## Summary
 
-Integrate BetterAuth authentication system with NeonDB PostgreSQL backend to provide user registration, login, logout, and session management for the TodoApp. Implement user-isolated data access by adding user_id scoping to all 9 existing API endpoints, ensuring each authenticated user only sees and manages their own tasks and history. Create purple-themed login/signup pages matching existing UI design patterns, with SweetAlert2 feedback for all authentication operations. Implement frontend route protection and backend JWT validation middleware to secure all protected routes and API endpoints.
+Integrate BetterAuth authentication system with NeonDB PostgreSQL backend to provide user registration, login, logout, and session management for the TodoApp. Implement user-isolated data access by adding user_id scoping to all 9 existing API endpoints, ensuring each authenticated user only sees and manages their own tasks and history. Create sunset-themed login/signup pages matching existing UI design patterns, with SweetAlert2 feedback for all authentication operations. Implement frontend route protection and backend JWT validation middleware to secure all protected routes and API endpoints.
 
 **Technical Approach**: Use BetterAuth MCP server for authentication operations, add database migration to include user_id columns in tasks and history tables, implement JWT middleware in FastAPI backend for token validation, create authentication context in Next.js frontend for state management, and build protected route wrappers to enforce authentication requirements.
 

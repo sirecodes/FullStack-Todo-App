@@ -1,6 +1,6 @@
 # Full-Stack Todo App 📝
 
-A modern, production-ready todo application built with React, Next.js, and FastAPI. Features a beautiful purple-themed UI, real-time task management, analytics dashboard, and complete task history tracking.
+A modern, production-ready todo application built with React, Next.js, and FastAPI. Features a beautiful sunset-themed UI, real-time task management, analytics dashboard, and complete task history tracking.
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)
@@ -14,7 +14,7 @@ A modern, production-ready todo application built with React, Next.js, and FastA
 - **Responsive Design**: Mobile-first design that works on all devices
 - **Dark Mode**: Eye-friendly dark theme support
 - **Real-time Updates**: Instant UI updates with optimistic rendering
-- **Beautiful UI**: Modern purple gradient theme with smooth animations
+- **Beautiful UI**: Modern sunset gradient theme with smooth animations
 
 ## 🚀 Quick Start
 
@@ -162,7 +162,7 @@ pytest tests/ -v
 - ⏱️ Activity timeline
 
 ### Design
-- 🎨 Purple gradient theme throughout
+- 🎨 sunset gradient theme throughout
 - 🌙 Dark mode support
 - 📱 Fully responsive
 - ✨ Smooth animations with Framer Motion
@@ -190,18 +190,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License.
 
-## 🙏 Acknowledgments
-
-- Built with [Claude Code](https://claude.com/claude-code)
-- Designed with [TailwindCSS](https://tailwindcss.com)
-- Charts by [Recharts](https://recharts.org)
-
 ## 📞 Support
 
 For issues and questions, please open an issue on GitHub.
 
 ---
 
-**Live Demo**: [Coming Soon]
+**Live Demo**: https://taskflow-sirecodes.vercel.app/
 
-**Made with ❤️ using Claude Code**
+**Made with ❤️ By Team Sire!**

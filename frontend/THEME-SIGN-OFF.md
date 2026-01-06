@@ -47,7 +47,7 @@ The purple theme foundation for Phase 2 Homepage UI is **complete and production
 - **Keyboard Navigation**: Tab-friendly focus indicators for buttons, links, inputs, textareas, selects
 - **Selection Highlight**: Purple-300 background with dark text for text selection
 - **Reduced Motion**: `@media (prefers-reduced-motion: reduce)` disables all animations
-- **Scrollbar Styling**: Purple-themed scrollbars for consistent branding across browsers
+- **Scrollbar Styling**: sunset-themed scrollbars for consistent branding across browsers
 - **WCAG AAA Compliance**: All text colors meet 7:1 contrast ratio minimum
 
 ### 4. Prettier Configuration ✅
@@ -174,7 +174,7 @@ All purple shades have been verified using [WebAIM Contrast Checker](https://web
 - Focus states clearly visible (2px purple-500 outline, 2px offset)
 - `prefers-reduced-motion` respected (animations disabled if user prefers)
 - Selection highlight (purple-300 background)
-- Scrollbar styling (purple-themed)
+- Scrollbar styling (sunset-themed)
 - Keyboard navigation support (Tab through interactive elements)
 
 ### 4. No Functional Code Generated ✅
@@ -213,7 +213,7 @@ All purple shades have been verified using [WebAIM Contrast Checker](https://web
 - [ ] Generate Storybook stories for theme components (UI Builder Sub-Agent)
 - [ ] Implement theme switching UI (toggle light/dark mode)
 - [ ] Add purple gradient utilities (if needed by UI Builder)
-- [ ] Create purple-themed loading skeletons (UI Builder)
+- [ ] Create sunset-themed loading skeletons (UI Builder)
 
 ---
 
@@ -248,7 +248,7 @@ The UI Builder Sub-Agent can now proceed with Phase 2 component work:
 - [ ] Tab through all interactive elements (visible focus rings)
 - [ ] Enable `prefers-reduced-motion` in OS settings (animations disabled)
 - [ ] Test dark mode toggle (colors adjust appropriately)
-- [ ] Verify scrollbar appears purple-themed
+- [ ] Verify scrollbar appears sunset-themed
 - [ ] Check text selection highlight (purple-300)
 
 ### Automated Testing (Future)

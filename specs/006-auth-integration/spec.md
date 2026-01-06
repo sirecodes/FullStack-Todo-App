@@ -3,7 +3,7 @@
 **Feature Branch**: `006-auth-integration`
 **Created**: 2025-12-15
 **Status**: Draft
-**Input**: User description: "Integrate login and signup authentication into the existing TodoApp using BetterAuth with NeonDB, ensuring user-isolated data access, seamless frontend integration, consistent purple-themed UI, and SweetAlert2 feedback."
+**Input**: User description: "Integrate login and signup authentication into the existing TodoApp using BetterAuth with NeonDB, ensuring user-isolated data access, seamless frontend integration, consistent sunset-themed UI, and SweetAlert2 feedback."
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -129,8 +129,8 @@ Users should remain logged in across browser sessions until they explicitly log 
 **Authentication Core**:
 
 - **FR-001**: System MUST integrate BetterAuth as the authentication provider using NeonDB PostgreSQL as the session/user storage backend
-- **FR-002**: System MUST provide a purple-themed signup page at /signup with email and password fields matching existing UI design patterns
-- **FR-003**: System MUST provide a purple-themed login page at /login with email and password fields matching existing UI design patterns
+- **FR-002**: System MUST provide a sunset-themed signup page at /signup with email and password fields matching existing UI design patterns
+- **FR-003**: System MUST provide a sunset-themed login page at /login with email and password fields matching existing UI design patterns
 - **FR-004**: System MUST validate email format client-side before submission (standard email regex)
 - **FR-005**: System MUST enforce minimum password length of 8 characters client-side
 - **FR-006**: System MUST hash passwords using BetterAuth's default secure hashing (bcrypt or argon2) before storage
@@ -231,7 +231,7 @@ Users should remain logged in across browser sessions until they explicitly log 
 - Frontend route protection for /tasks, /analytics, /history, /tasks/[id]
 - Backend authorization for all 9 existing API endpoints
 - Database schema migration to add user_id columns
-- Purple-themed login/signup pages matching existing design
+- sunset-themed login/signup pages matching existing design
 - SweetAlert2 integration for all auth-related user feedback
 - User-isolated data access (each user only sees their own tasks and history)
 - Authentication state management in frontend

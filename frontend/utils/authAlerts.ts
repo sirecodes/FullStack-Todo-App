@@ -2,7 +2,7 @@
  * Authentication Alert Utilities
  *
  * SweetAlert2 wrapper functions for authentication feedback.
- * Provides consistent purple-themed alerts across all auth flows.
+ * Provides consistent sunset-themed alerts across all auth flows.
  *
  * @see /specs/006-auth-integration/spec.md - FR-011 to FR-016
  */

@@ -482,7 +482,7 @@ Delivers:
 - ✅ Users can create accounts (signup)
 - ✅ Accounts stored securely with BetterAuth
 - ✅ JWT authentication working
-- ✅ Purple-themed signup page
+- ✅ sunset-themed signup page
 - ✅ SweetAlert2 feedback
 
 **Value**: First deployable increment - users can register

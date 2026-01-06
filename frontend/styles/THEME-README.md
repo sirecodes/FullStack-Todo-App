@@ -215,7 +215,7 @@ Text selection uses purple-300 background with dark text for readability:
 
 ### 4. Scrollbar Styling
 
-Purple-themed scrollbar for consistent branding:
+sunset-themed scrollbar for consistent branding:
 
 ```css
 /* Webkit */

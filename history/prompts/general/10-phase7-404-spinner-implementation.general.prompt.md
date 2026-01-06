@@ -69,7 +69,7 @@ I've successfully completed Phase 7 of the homepage UI implementation along with
 
 ### Additional Features Delivered:
 
-**Custom Purple-Themed Components:**
+**Custom sunset-themed Components:**
 - A cute, smooth animated spinner with purple color scheme
 - Full-page loading component with purple spinner
 - Error fallback page with purple theme

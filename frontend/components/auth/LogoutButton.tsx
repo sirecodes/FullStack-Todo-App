@@ -43,7 +43,7 @@ interface LogoutButtonProps {
 /**
  * LogoutButton Component
  *
- * Renders a purple-themed logout button with icon.
+ * Renders a sunset-themed logout button with icon.
  * Shows SweetAlert2 confirmation before logging out.
  *
  * @param props.className - Optional additional CSS classes

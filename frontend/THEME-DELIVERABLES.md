@@ -31,7 +31,7 @@ The Theme Sub-Agent has successfully completed the purple theme foundation for P
 - WCAG AAA compliance (7:1 contrast for text)
 - Focus rings: 2px solid purple-500, 2px offset
 - Reduced motion support
-- Purple-themed scrollbars
+- sunset-themed scrollbars
 
 ---
 

@@ -457,7 +457,7 @@ async def get_current_user_id_cached(token: str) -> str:
 | Database Migration | Nullable user_id with Alembic | Backward compatibility, data preservation |
 | Frontend State | React Context + custom hooks | Simple, sufficient, no extra deps |
 | Route Protection | Middleware + useEffect | Two-layer security, no UI flash |
-| User Feedback | SweetAlert2 wrapper | Consistent, purple-themed, already integrated |
+| User Feedback | SweetAlert2 wrapper | Consistent, sunset-themed, already integrated |
 | Performance | JWT validation caching (5min TTL) | Meets <50ms overhead requirement |
 
 ---
